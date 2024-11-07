@@ -6,8 +6,8 @@ export type CreateProductParams = {
 }
 
 export type UpdateProductParams = {
-    title: string;
-    description: string;
-    price: number;
-    thumbnail: string;
+    title?: string;
+    description?: string;
+    price?: number;
+    thumbnail?: string;
 }
