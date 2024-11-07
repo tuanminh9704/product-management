@@ -8,29 +8,27 @@ import { Repository } from 'typeorm';
 export class ProductsService {
     constructor(
         @InjectRepository(Product) private productRepository : Repository<Product>
-    ){
+    ){}
 
+    async getAllProduct() {
+        return await this.productRepository.find();
     }
 
-    getAllProduct() {
-        return this.productRepository.find();
+    async findProduct(id){
+        return await this.productRepository.findOneBy(id);
     }
 
-    findProduct(id){
-        return this.productRepository.findOneBy(id)
-    }
-
-    createProduct(createProductDetails: CreateProductParams) {
+    async createProduct(createProductDetails: CreateProductParams) {
         const newProduct = this.productRepository.create(createProductDetails);
-        return this.productRepository.save(newProduct);
+        return await this.productRepository.save(newProduct);
         
     }
 
-    updateProduct(id: number, updateProductDetails : UpdateProductParams) {
-        return this.productRepository.update({id}, updateProductDetails);
+    async updateProduct(id: number, updateProductDetails : UpdateProductParams) {
+        return await this.productRepository.update({id}, updateProductDetails);
     }
 
-    deleteProduct(id) {
-        return this.productRepository.delete(id);
+    async deleteProduct(id) {
+        return await this.productRepository.delete(id);
     }
 }
