@@ -10,27 +10,28 @@ export class ProductsController {
     ){}
 
     @Get()
-    getProduct() {
-        return this.productService.getAllProduct();
+    async getProducts () {
+        return await this.productService.getAllProduct();
     }
 
     @Get(":id")
-    getProductById(@Param() id : number){
-        return this.productService.findOneProduct(id);
+    async getProductById(@Param() id : number){
+        return await this.productService.findProduct(id);
     }
+    
 
     @Post()
-    createProduct(@Body() createProductDto : CreateProductDto){
-        return this.productService.createProduct(createProductDto);
+    async createProduct(@Body() createProductDto : CreateProductDto){
+        return await this.productService.createProduct(createProductDto);
     }
 
     @Put(':id')
-    updateProductById(@Param() id : number, @Body() updateProductDto : UpdateProductDto){
-        return this.productService.updateProduct(id, updateProductDto);
+    async updateProductById(@Param() id : number, @Body() updateProductDto : UpdateProductDto){
+        return await this.productService.updateProduct(id, updateProductDto);
     }
 
     @Delete(':id')
-    deleteProductbyId(@Param() id : number){
-        return this.productService.deleteProduct(id);
+    async deleteProductbyId(@Param() id : number){
+        return await this.productService.deleteProduct(id);
     }
 }

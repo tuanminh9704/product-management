@@ -16,7 +16,7 @@ export class ProductsService {
         return this.productRepository.find();
     }
 
-    findOneProduct(id){
+    findProduct(id){
         return this.productRepository.findOneBy(id)
     }
 
