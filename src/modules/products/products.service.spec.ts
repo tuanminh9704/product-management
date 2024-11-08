@@ -85,7 +85,7 @@ describe('ProductsService', () => {
         price: 20,
         thumbnail: "thumbnail"
       }
-      const result = await service.createProduct(newProduct);
+      const result = await service.createProduct(newProduct as any);
       expect(result).toEqual({id: expect.any(Number), ...newProduct});
       expect(mockProductRepository.create).toHaveBeenCalled();
       expect(mockProductRepository.save).toHaveBeenCalled();
