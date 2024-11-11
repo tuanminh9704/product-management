@@ -20,11 +20,10 @@ export class ProductsController {
         return await this.productService.findProduct(id);
     }
     
-
+    @UseInterceptors(FileInterceptor("file"))
     @Post()
-    @UseInterceptors(FileInterceptor('file'))
-    async createProduct(@Body() createProductDto : CreateProductDto){
-        return await this.productService.createProduct(createProductDto);
+    async createProduct(@Body() createProductDto : CreateProductDto, @UploadedFile() file: Express.Multer.File,){
+        return await this.productService.createProduct(createProductDto, file);
     }
 
     @Put(':id')

@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Body, Injectable, NotFoundException, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { CreateProductParams, UpdateProductParams } from './utils/type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '../../entities/Product';
@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import *as AWS from "aws-sdk";
 import { ConfigService } from '@nestjs/config';
 import { createS3 } from 'src/configs/aws-s3.config';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Injectable()
 export class ProductsService {
@@ -29,7 +30,9 @@ export class ProductsService {
         return product;
     }
 
-    async createProduct(createProductDetails: CreateProductParams) {
+    async createProduct(createProductDetails: CreateProductParams, file: Express.Multer.File) {
+        const thumbnailUrl = (await this.uploadImage(file)).Location;
+        createProductDetails.thumbnail = thumbnailUrl;
         const newProduct = this.productRepository.create(createProductDetails);
         if(!newProduct){
             throw new BadRequestException();
