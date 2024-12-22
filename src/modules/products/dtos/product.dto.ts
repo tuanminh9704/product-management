@@ -9,12 +9,12 @@ export class CreateProductDto {
     @IsNotEmpty()
     description: string;
 
-    @IsNumber()
-    @IsNotEmpty()
+    // @IsNumber()
+    // @IsNotEmpty()
     price: number;
 
-    @IsString()
-    @IsNotEmpty()
+    // @IsString()
+    // @IsNotEmpty()
     thumbnail: string;
 }
 

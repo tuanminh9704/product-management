@@ -10,7 +10,9 @@ import { ErrorHandlingMiddleware } from './middlewares/error-handling/error-hand
 @Module({
   imports: [
     ProductsModule,
-    ConfigModule.forRoot({}),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     DatabaseModule,
   ],
   controllers: [AppController],
